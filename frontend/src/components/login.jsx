@@ -1,5 +1,6 @@
 import React, {useEffect, useState, useContext} from 'react';
 import AuthContext from '../context/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 import styled from 'styled-components';
 
@@ -81,6 +82,10 @@ const LoginForm =()=>{
     formdata.append("password", password);
 
     let {loginUser} = useContext(AuthContext)
+    const navigate = useNavigate();
+  function gotoSignupPage() {
+    navigate("/signup");
+  }
 
   return (
     <AuthWrapper>
@@ -113,7 +118,7 @@ const LoginForm =()=>{
           </FormGroup>
           <LoginButton type="submit">Login</LoginButton>
           <ForgotPasswordLink>
-            Don't have an account <a href="signup">Signup</a>
+            Don't have an account <a onClick={gotoSignupPage}>Signup</a>
           </ForgotPasswordLink>
         </Form>
       </AuthInner>

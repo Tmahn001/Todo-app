@@ -2,6 +2,7 @@ import React, {useEffect, useState, useContext} from 'react';
 import AuthContext from '../context/AuthContext';
 
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 
 const AuthWrapper = styled.div`
   display: flex;
@@ -81,6 +82,10 @@ const SignupForm =()=>{
     formdata.append("password", password);
 
     let {signupUser} = useContext(AuthContext)
+    const navigate = useNavigate();
+    function gotoSignupPage() {
+      navigate("/signup");
+    }
 
   return (
     <AuthWrapper>
@@ -121,6 +126,7 @@ const SignupForm =()=>{
             <CheckboxLabel>
               <CustomCheckbox type="checkbox" id="customCheck1" />
               Have an account?
+              <a onClick={gotoSignupPage}>Login</a>
             </CheckboxLabel>
           </FormGroup>
           <LoginButton type="submit">Sign up</LoginButton>
