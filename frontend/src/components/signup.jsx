@@ -83,8 +83,8 @@ const SignupForm =()=>{
 
     let {signupUser} = useContext(AuthContext)
     const navigate = useNavigate();
-    function gotoSignupPage() {
-      navigate("/signup");
+    function gotoLoginPage() {
+      navigate("/login");
     }
 
   return (
@@ -123,11 +123,12 @@ const SignupForm =()=>{
             />
           </FormGroup>
           <FormGroup>
-            <CheckboxLabel>
-              <CustomCheckbox type="checkbox" id="customCheck1" />
+          <ForgotPasswordLink>
+            
               Have an account?
-              <a onClick={gotoSignupPage}>Login</a>
-            </CheckboxLabel>
+              <a onClick={gotoLoginPage}>Login</a>
+              </ForgotPasswordLink>
+    
           </FormGroup>
           <LoginButton type="submit">Sign up</LoginButton>
           <ForgotPasswordLink>

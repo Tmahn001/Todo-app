@@ -10,10 +10,12 @@ import {
 } from './styled/FormStyled'
 
 import emptyImg from '../img/bubble-gum-signing-the-contract.png'
+import { Slide, ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const API = import.meta.env.VITE_API_URL
 
-export const Article = () => {
+export const Article = ({categoryName}) => {
   let {authTokens, logoutUser} = useContext(AuthContext)
   const [selectedCategory, setSelectedCategory] = useState('');
   const [searchQuery, setSearchQuery] = useState('');
@@ -163,8 +165,6 @@ export const Article = () => {
   const createTask = async () => {
     // Convert the due_date string to a Python datetime object
     const dueDate = inputs.due_date ? new Date(inputs.due_date) : null;
-
-
   
     const res = await fetch(`${API}/api/tasks`, {
       method: 'POST',
@@ -181,12 +181,28 @@ export const Article = () => {
       }),
     });
   
-    const data = await res.json();
-    console.log(data);
+    if (res.ok) {
+      const data = await res.json();
+      console.log(data);
   
-    await getTasks(pagination.self);
-  }
-
+      // Show success toast
+      toast.success('Task created successfully', {
+        position: 'top-right',
+        autoClose: 3000, // Close the toast after 3 seconds (adjust as needed)
+      });
+  
+      await getTasks(pagination.self);
+    } else {
+      // Handle the error case
+      // Show error toast
+      toast.error('Error creating task', {
+        position: 'top-right',
+        autoClose: 3000, // Close the toast after 3 seconds (adjust as needed)
+      });
+  
+      console.error(`Error: ${res.status}`);
+    }
+  };
   // ==> Update a task : PUT
   const updateTask = async () => {
     const res = await fetch(`${API}/api/tasks/${currentId}`, {
@@ -250,11 +266,12 @@ export const Article = () => {
       description: '',
     })
   }
-
+  
   useEffect(() => {
     fetchCategories();
-    getTasks();
-  }, [selectedCategory, searchQuery])
+    getTasks()
+
+  }, [categoryName, selectedCategory, searchQuery])
 
   console.log(inputs.category_id)
 

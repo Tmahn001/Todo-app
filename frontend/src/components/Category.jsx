@@ -11,53 +11,11 @@ import {
 
 const API = import.meta.env.VITE_API_URL
 
-export const CategoryForm = () => {
+export const CategoryForm = ({handleSubmit, handleInputChange, categoryName, error}) => {
   const { authTokens } = useContext(AuthContext);
-  const [categoryName, setCategoryName] = useState('');
-  const [error, setError] = useState('');
+  
 
-  const handleInputChange = (e) => {
-    setCategoryName(e.target.value);
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    try {
-      const res = await fetch(`${API}/api/categories`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'x-access-token': authTokens?.token,
-        },
-        body: JSON.stringify({ name: categoryName }),
-      });
-
-      if (res.ok) {
-        // Category added successfully, clear input and error
-        toast.success("New category added")
-        setCategoryName('');
-        setError('');
-        // You can also update the list of categories here if needed
-      } else if (res.status === 400) {
-        // Handle validation errors or category already exists
-        toast.warning("category exists",
-            {position: toast.POSITION.TOP_RIGHT,}
-         )
-        const data = await res.json();
-        setError(data.error);
-      } else {
-        // Handle other error statuses if needed
-        toast.error("Failed to add category",
-            {position: toast.POSITION.TOP_RIGHT,}
-        )
-        console.error(`Error: ${res.status}`);
-
-      }
-    } catch (error) {
-      console.error('An error occurred:', error);
-    }
-  };
+  
 
   return (
    

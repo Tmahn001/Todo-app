@@ -9,7 +9,7 @@ class User(db.Model):
     public_id = sa.Column(sa.String(50), unique = True)
     name = sa.Column(sa.String(100))
     email = sa.Column(sa.String(70), unique = True)
-    password = sa.Column(sa.String(80))
+    password = sa.Column(sa.String(256))
     tasks = db.relationship('Task', backref='user', lazy=True)
 
 class Category(db.Model):
