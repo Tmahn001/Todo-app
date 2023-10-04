@@ -8,6 +8,7 @@ import "react-toastify/dist/ReactToastify.css";
 const AuthContext = createContext()
 
 export default AuthContext;
+const API = import.meta.env.VITE_API_URL
 
 export const AuthProvider = ({children}) =>{
     let [authTokens, setAuthTokens] = useState(()=> localStorage.getItem('authTokens') ? JSON.parse(localStorage.getItem('authTokens')) : null)
@@ -24,7 +25,7 @@ export const AuthProvider = ({children}) =>{
         formdata.append("password", e.target.password.value);
       
         try {
-          let response = await fetch('http://localhost:5000/api/login', {
+          let response = await fetch(`${API}/api/login`, {
             method: 'POST',
             body: formdata
           });
@@ -79,7 +80,7 @@ export const AuthProvider = ({children}) =>{
         formdata.append("password", e.target.password.value);
       
         try {
-          let response = await fetch('http://localhost:5000/api/signup', {
+          let response = await fetch(`${API}/api/signup`, {
             method: 'POST',
             body: formdata
           });
@@ -135,7 +136,7 @@ export const AuthProvider = ({children}) =>{
 
     let updateToken = async ()=> {
 
-        let response = await fetch('http://localhost:5000/api/user', {
+        let response = await fetch(`${API}/api/user`, {
             method:'GET',
             headers:{
                 'Content-Type':'application/json',
@@ -160,7 +161,7 @@ export const AuthProvider = ({children}) =>{
     }
 
     let getProfile = async()=>{
-        let response = await fetch('http://localhost:5000/api/user', {
+        let response = await fetch(`${API}/api/user`, {
             method:'GET',
             headers:{
                 'Content-Type':'application/json',
