@@ -9,9 +9,7 @@ This is a basic application with the objective of being able to save your notes 
   - [Frontend](#frontend)
   - [Backend](#backend)
   - [REST API](#rest-api)
-- [Image gallery](#image-gallery)
-  - [Desktop](#desktop)
-  - [Mobile](#mobile)
+
 
 ## Built with
 
@@ -40,7 +38,7 @@ I leave you links to NodeJS and Python for installation:
 First of all download the project to start using it, do it from the terminal:
 
 ```shell
-$ git clone https://github.com/Remy349/todo-app-flask-reactjs.git
+$ git clone https://github.com/Tmahn001/Todo-app
 
 $ cd todo-app-flask-reactjs
 ```
@@ -138,88 +136,13 @@ Everything related to the API is inside `flaskr/api/tasks.py`. The following tab
 | `POST`      | */api/tasks*        | Register a new task.                    |
 | `PUT`       | */api/tasks/id*     | Modify the values of a task.            |
 | `DELETE`    | */api/tasks/id*     | Delete a task from the collection.      |
+| `POST`      | */api/login*        | Login and get token in response         |
+| `POST`      | */api/signup*        | Register a new user                   |
+| `GET`      | */api/categories*        | get categories                  |
 
-The API provides the responses in JSON format that the Frontend needs, plus a pagination method was implemented to not send multiple data and thus not overload the client interface.
 
-If you make a `GET` request for all tasks you will see something like this:
 
-- `http://localhost:5000/api/tasks`
 
-```shell
-{
-  "items": [
-    {
-      "description": "Just doing some test to finally complete this project! :)",
-      "id_task": 1,
-      "timestamp": "Tue, 20 Dec 2022 02:25:49 GMT",
-      "title": "Test1"
-    },
-    {
-      "description": "Just doing some test to finally complete this project! :)",
-      "id_task": 2,
-      "timestamp": "Tue, 20 Dec 2022 02:26:02 GMT",
-      "title": "Test2"
-    },
-    {
-      "description": "Just doing some test to finally complete this project! :)",
-      "id_task": 3,
-      "timestamp": "Tue, 20 Dec 2022 02:26:09 GMT",
-      "title": "Test3"
-    },
-    {
-      "description": "Just doing some test to finally complete this project! :)",
-      "id_task": 4,
-      "timestamp": "Tue, 20 Dec 2022 02:26:22 GMT",
-      "title": "Test4"
-    },
-    {
-      "description": "Just doing some test to finally complete this project! :)",
-      "id_task": 6,
-      "timestamp": "Tue, 20 Dec 2022 02:27:23 GMT",
-      "title": "Test5"
-    },
-    {
-      "description": "Just doing some test to finally complete this project! :)",
-      "id_task": 7,
-      "timestamp": "Tue, 20 Dec 2022 04:37:03 GMT",
-      "title": "Test6"
-    }
-  ],
-  "links": {
-    "next": "/api/tasks?page=2&per_page=6",
-    "prev": null,
-    "self": "/api/tasks?page=1&per_page=6"
-  },
-  "meta": {
-    "page": 1,
-    "per_page": 6,
-    "total_items": 7,
-    "total_pages": 2
-  }
-}
-```
 
-## Image gallery
 
-### Desktop:
 
-![PREVIEW](./preview/preview.png)
-![PREVIEW](./preview/preview1.png)
-
-### Mobile
-
-<table>
-  <tr>
-    <td>
-      <img src="./preview/preview-m.png" alt="Mobile" title="Mobile version" width="100%" />
-    </td>
-    <td>
-      <img src="./preview/preview-m1.png" alt="Mobile" title="Mobile version" width="100%" />
-    </td>
-    <td>
-      <img src="./preview/preview-m2.png" alt="Mobile" title="Mobile version" width="100%" />
-    </td>
-  </tr>
-</table>
-
-### Developed by Santiago de Jesús Moraga Caldera - Remy349(GitHub)
